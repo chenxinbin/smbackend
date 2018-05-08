@@ -18,3 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/backend', 'DashboardController@index')->name('backend');
+Route::get('/backend/cms/', 'CmsController@index')->name('backend.cms.index');
+Route::any('/backend/cms/add', 'CmsController@add')->name('backend.cms.add');
+Route::any('/backend/cms/edit/{post_id}', 'CmsController@edit')->name('backend.cms.edit');
+
+Route::get('/backend/cms/category', 'CmsController@category')->name('backend.cms.category');
+Route::any('/backend/cms/category_add', 'CmsController@category_add')->name('backend.cms.category_add');
+Route::any('/backend/cms/category_edit/{category_id}', 'CmsController@category_edit')->name('backend.cms.category_edit');
+
+// Route::get('/backend/cms/add_ajax', 'CmsController@add_ajax')->name('backend.cms.add_ajax');
+
+
