@@ -4,9 +4,8 @@
 <link href="http://ueditor.baidu.com/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
 <link href="http://ueditor.baidu.com/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet">
-<style type="text/css">
+<link href="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/css/jquery.fileupload.min.css" rel="stylesheet">
 
-</style>
 @endsection
 
 @section('breadcrumb')
@@ -78,15 +77,11 @@
                         <label for="inputStatus" class="col-sm-2 control-label">封面图片</label>
 
                         <div class="col-sm-10">
-    <!-- Upload Button -->
-    <a href="javascript:;" class="upload-button">
-        <span class="upload-button-icon oc-icon-upload"></span>
-    </a>
-
-    <!-- Existing files -->
-    <div class="upload-files-container">
-            </div>
-                          <input id="fileupload" type="file" name="attachment" data-url="ajax_file_upload" class="form-control"  multiple>
+                          <input type="hidden" name="featured_image" value="{{$post->featured_image}}" />
+                          <span class="fileinput-button">
+                              <img id="upload-files-container" src="{{$post->featured_image}}">
+                              <input id="fileupload" type="file" name="upfile">
+                          </span>
                         </div>
                       </div>
 
@@ -191,22 +186,22 @@
                     locale: 'zh-cn', format: 'YYYY-MM-DD HH:mm:ss'
                 });
 
-    var serverPath = '/server/umeditor/',
-    um = UM.getEditor('editor', {
-        imageUrl:serverPath + "imageUp.php",
-        imagePath:serverPath,
+    var um = UM.getEditor('editor', {
+        imageUrl: "{{route('backend.upload.ueditor')}}",
+        imagePath: '',
         textarea: 'body'
     });
 
     $('#fileupload').fileupload({
+        url: "{{route('backend.upload.ueditor')}}",
         dataType: 'json',
         done: function (e, data) {
             console.log(data.result);
-            if(data.result.status){
-                $('#attachment_path').val(data.result.path);
-                $("#fileupload_container").html("已上传，重命名为<a href='"+data.result.url+"' target='_blank'>"+data.result.path+"</a>");
+            if(data.result.state=='SUCCESS'){
+                $('input[name=featured_image]').val(data.result.url);
+                $('#upload-files-container').attr('src', data.result.url);
             }else
-                alert(data.result.message);
+                alert(data.result.state);
         }
     });
 

@@ -56,6 +56,7 @@ class CmsController extends Controller
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
         $post->body = $request->input('body');
+        $post->featured_image = $request->input('featured_image');
         $post->category_id = $request->input('category');
         $post->status = $request->input('status');
         $post->author = $request->input('author');
@@ -96,6 +97,7 @@ class CmsController extends Controller
         $post->category_id = $request->input('category');
         $post->status = $request->input('status');
         $post->body = $request->input('body');
+        $post->featured_image = $request->input('featured_image');
         $post->author = $request->input('author');
         $post->published_at = $request->input('published_at');
         $post->tags = $request->input('tags');

@@ -26,6 +26,8 @@ Route::get('/backend/cms/category', 'CmsController@category')->name('backend.cms
 Route::any('/backend/cms/category_add', 'CmsController@category_add')->name('backend.cms.category_add');
 Route::any('/backend/cms/category_edit/{category_id}', 'CmsController@category_edit')->name('backend.cms.category_edit');
 
+Route::any('/backend/upload/ueditor', 'UploadController@UEditor')->name('backend.upload.ueditor');
+
 // Route::get('/backend/cms/add_ajax', 'CmsController@add_ajax')->name('backend.cms.add_ajax');
 
 
