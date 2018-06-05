@@ -327,12 +327,6 @@ $.notifyDefaults({
                     }, 0)
                 })
 
-
-                if (data['X_SM_STATUS'] && data['X_SM_STATUS']=='SUCCESS') {
-                    //('alert');
-                    $.notify({'message': data['MESSAGE']}, {type: 'success'});
-                }
-
                 /*
                  * Handle redirect
                  */
@@ -341,9 +335,22 @@ $.notifyDefaults({
                     isRedirect = true
                 }
 
-                if (isRedirect) {
-                    requestOptions.handleRedirectResponse(options.redirect)
+                
+                if (data['X_SM_STATUS'] && data['X_SM_STATUS']=='SUCCESS') {
+                    //('alert');
+                    $.notify({'message': data['MESSAGE']}, 
+                        {type: 'success', onClosed: function() {
+                            if (isRedirect) {
+                                requestOptions.handleRedirectResponse(options.redirect)
+                            }
+
+                        }}
+                    );
                 }
+
+
+
+
 
                 /*
                  * Handle validation

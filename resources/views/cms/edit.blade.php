@@ -153,6 +153,7 @@
                     <span class="btn-text">
                         or <a href="{{route('backend.cms.index')}}">取消</a>
                     </span>
+                    <button type="button" data-request="del_ajax" data-load-indicator="删除中..." class="btn btn-danger pull-right" data-disposable="">删除</button>
                 </div>
             </div>
           </div>
@@ -189,7 +190,8 @@
     var um = UM.getEditor('editor', {
         imageUrl: "{{route('backend.upload.ueditor')}}",
         imagePath: '',
-        textarea: 'body'
+        textarea: 'body',
+        zIndex: 1200
     });
 
     $('#fileupload').fileupload({

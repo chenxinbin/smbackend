@@ -179,7 +179,8 @@
     var um = UM.getEditor('editor', {
         imageUrl: "{{route('backend.upload.ueditor')}}",
         imagePath: '',
-        textarea: 'body'
+        textarea: 'body',
+        zIndex: 1200
     });
 
     $('#fileupload').fileupload({

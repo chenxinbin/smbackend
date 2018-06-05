@@ -76,6 +76,20 @@ class CmsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function del_ajax(Request $request, $post_id)
+    {
+        $post = \App\CmsPost::findOrFail($post_id);
+        $post->delete();
+
+        return ['X_SM_STATUS'=>'SUCCESS', 'X_SM_REDIRECT'=> route('backend.cms.index'), 'MESSAGE'=>'删除成功'];
+    }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Request $request, $post_id)
     {
         $post = \App\CmsPost::findOrFail($post_id);
@@ -83,6 +97,7 @@ class CmsController extends Controller
 
         return view('cms/edit', compact('post', 'categorys'));
     }
+
 
      /**
      * Show the application dashboard.
